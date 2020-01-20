@@ -28,7 +28,7 @@ Pour permettre une communication CROSS-DOMAIN en toute sécurité il faut suivre
 ```
 
 #### Description d'un Job
-Un job est une tâche envoyée à Ionic pour accéder en lecture ou écriture aux BluetoothLE.
+Un **job** est une tâche envoyée à Ionic pour accéder en lecture ou écriture aux BluetoothLE.
 
 ``` js
 export interface BEEconJob {
@@ -67,15 +67,40 @@ export interface BEEconCMD {
 
 
 ### 2. De Ionic à Hivetracker.io
+Cette fonction permet de déterminer le résultat d'un **job** associé à des périphériques BluetoothLE.
+
 
 ``` js
   window.addEventListener('message', (jobResults) => {
+    try{
+      //
+      // Try to decode buffer
+      const results = JSON.parse(jobResults);
+
+      //
+      // voerify the context
+      if (jobResults.action === 'hivetracker:receive') {
+        return;
+      }
+
+      //
+      // Access on result 
+      jobResults.forEach(result => {
+          console.log(result.address);
+          console.log(result.result);
+          console.log(result.error);
+      });
+    }catch(error){
+      // ...
+    }
 
   });
 ``` 
 
 #### JobResults
-`JobResults` est un  tableau de `BEEconJobResult`
+`JobResults` est un  tableau de `BEEconJobResult[]`. Un `BEEconJobResult` décrit le résultat positif ou négatif d'une commande. Un résultat est toujours relatif au dernier `BEEconJob`.
+
+
 ``` js
 export interface BEEconJobResult {
   address: string;
@@ -83,6 +108,7 @@ export interface BEEconJobResult {
   error: string;
 }
 ``` 
+
 
 
 

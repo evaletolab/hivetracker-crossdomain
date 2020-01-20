@@ -24,11 +24,8 @@ export class AppComponent {
     {selected: true, value: '00:00:00:00:03:35'}
   ];
 
-  SEND_MSG = [
-    'hivertracker:job',
-  ];
   RECEIVE_MSG = [
-    'hivertracker:receive',
+    'hivetracker:receive',
   ]
 
   receive;
