@@ -67,7 +67,7 @@ export interface BEEconCMD {
 }
 ``` 
 
-* [bluetooth.ts](src/app/bluetooth.ts) 
+* [beecon.ts](src/app/beecon.ts) 
 * [beecon-protocol.ts](src/app/beecon-protocol.ts)
 
 ### 2. Communication de Ionic à Hivetracker.io
@@ -114,7 +114,7 @@ export interface BEEconJobResult {
 }
 ``` 
 
-* [bluetooth.ts](src/app/bluetooth.ts) 
+* [beecon.ts](src/app/beecon.ts) 
 * [beecon-protocol.ts](src/app/beecon-protocol.ts)
 
 

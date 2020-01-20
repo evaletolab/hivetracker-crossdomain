@@ -1,4 +1,4 @@
-import { BEEconCMD } from './bluetooth';
+import { BEEconCMD } from './beecon';
 
 
 //

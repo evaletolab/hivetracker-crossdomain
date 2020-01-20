@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { BEEconDict } from './beecon-protocol';
-import { BEEconCMD, BEEconJobResult } from './bluetooth';
+import { BEEconCMD, BEEconJobResult } from './beecon';
 
 @Component({
   selector: 'app-root',
