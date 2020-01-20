@@ -1,3 +1,7 @@
+#### Version: 0.1
+#### Date publication: 20 Janvier 2020
+
+
 # app.hivertracker.io cross domain communication
 L’objectif est de réaliser une solution logicielle qui permet d’utiliser les fonctionnalités business de app.hivetracker.io et le bluetooth (Ionic) dans le même context applicatif ou au moins dans le même OS avec deux applications distinctes. 
 
