@@ -21,6 +21,11 @@ Nous avons créé une API (javascript) qui respecte la norme de sécurité (CROS
 
 ### 1. Communication de Hivetracker.io à Ionic
 ``` js
+  const addresses = [
+    '00:00:00:00:03:35',
+    '00:00:00:00:03:36',
+  ];
+  
   const run = {
     cmd: "0x06",
     text: "Get epoch time",
@@ -29,8 +34,8 @@ Nous avons créé une API (javascript) qui respecte la norme de sécurité (CROS
   
   const job = {
     action: 'hivertracker:job',
-    addresses: (*addresses*),
-    run: run
+    addresses: (addresses),
+    run: (run)
   };
   window.parent.postMessage(JSON.stringify(job), '*');
 ```
