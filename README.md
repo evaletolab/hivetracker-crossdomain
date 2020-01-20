@@ -79,17 +79,17 @@ Cette fonction permet de déterminer le résultat d'un **job** associé à des p
     try{
       //
       // Try to decode buffer
-      const results = JSON.parse(data);
+      const result = JSON.parse(data);
 
       //
       // voerify the context
-      if (jobResults.action === 'hivetracker:receive') {
+      if (result.action === 'hivetracker:receive') {
         return;
       }
 
-      const jobResults = results.value;
       //
       // Access on result 
+      const jobResults = result.value;
       jobResults.forEach(result => {
           console.log(result.address);
           console.log(result.result);
