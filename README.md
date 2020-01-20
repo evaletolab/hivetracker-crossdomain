@@ -1,12 +1,6 @@
 # app.hivertracker.io cross domain communication
 L’objectif est de réaliser une solution logicielle qui permet d’utiliser les fonctionnalités business de app.hivetracker.io et le bluetooth (Ionic) dans le même context applicatif ou au moins dans le même OS avec deux applications distinctes. 
 
-Nous allons créer une API (js) selon les normes de sécurité (CROSS-DOMAIN) qui peut fonctionner dans le même processus mémoire entre le navigateur pour app.hivetracker.io et Ionic. Cette API est composée de deux parties
-
-1. Communication depuis hivetracker.io à Ionic (BLE)
-2. Communication depuis Ionic (BLE) à Hivetracker.io 
-
-
 ## CROSS-DOMAIN Communication
 Pour permettre une communication CROSS-DOMAIN en toute sécurité il faut suivre quelques règles. Normalement, les scripts de différentes pages sont autorisés à accéder les uns aux autres si et seulement si les pages depuis lesquelles ils sont exécutés ont des URL de même origine, c'est-à-dire avec le même protocole (généralement http ou https), le même numéro de port (80 étant le port par défaut pour  http), et le même nom d'hôte (à condition que document.domain soit initialisé à la même valeur par les deux pages).
  La nature de l'application Web hivetracker.io et son fonctionnement avec PHP ne permet pas de garantir la même origine, ainsi il n’est pas possible de faire une passerelle "naïve" entre le Web et Ionic.
@@ -16,8 +10,12 @@ Pour permettre une communication CROSS-DOMAIN en toute sécurité il faut suivre
 * https://developer.mozilla.org/fr/docs/Web/API/Window/postMessage
 
 ## Protocol v1
+Nous avons créé une API (javascript) qui respecte la norme de sécurité (CROSS-DOMAIN pour javascript) qui permet un fonctionnement dans le même processus mémoire pour le navigateur (app.hivetracker.io) et Ionic (BluetoothLE). Cette API est composée des deux parties suivantes :
 
-### 1. De Hivetracker.io à Ionic
+1. Communication depuis hivetracker.io à Ionic (BLE)
+2. Communication depuis Ionic (BLE) à Hivetracker.io 
+
+### 1. Communication de Hivetracker.io à Ionic
 ``` js
   const job = {
     action: 'hivertracker:job',
@@ -66,7 +64,7 @@ export interface BEEconCMD {
 ``` 
 
 
-### 2. De Ionic à Hivetracker.io
+### 2. Communication de Ionic à Hivetracker.io
 Cette fonction permet de déterminer le résultat d'un **job** associé à des périphériques BluetoothLE.
 
 
@@ -97,8 +95,9 @@ Cette fonction permet de déterminer le résultat d'un **job** associé à des p
   });
 ``` 
 
-#### JobResults
+#### Détail de JobResults
 `JobResults` est un  tableau de `BEEconJobResult[]`. Un `BEEconJobResult` décrit le résultat positif ou négatif d'une commande. Un résultat est toujours relatif au dernier `BEEconJob`.
+Le résultat est une représentation en String d'un buffer de bytes qui suit le format suivant `'1:112:224:43:45'`
 
 
 ``` js
@@ -108,6 +107,9 @@ export interface BEEconJobResult {
   error: string;
 }
 ``` 
+
+
+### 3. Mode DEBUG
 
 
 
