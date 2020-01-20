@@ -75,11 +75,11 @@ Cette fonction permet de déterminer le résultat d'un **job** associé à des p
 
 
 ``` js
-  window.addEventListener('message', (jobResults) => {
+  window.addEventListener('message', (data) => {
     try{
       //
       // Try to decode buffer
-      const results = JSON.parse(jobResults);
+      const results = JSON.parse(data);
 
       //
       // voerify the context
