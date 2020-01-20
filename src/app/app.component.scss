@@ -1,0 +1,28 @@
+.block{
+  padding: 10px;
+  margin: 5px;
+  border-bottom: 1px solid #ddd;
+  ul {
+    width: max-content;
+    padding-left: 15px;
+    li {
+      padding: 5px 8px;
+      margin-bottom: 5px;
+    }
+  }
+  button{
+    padding: 8px 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    font-size: 1.5em;
+  }
+}
+
+li.selected {
+  background-color: #ddd;
+}
+
+select, input.payload {
+  padding: 5px;
+  font-size: 16px;
+}
