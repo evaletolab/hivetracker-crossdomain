@@ -24,3 +24,9 @@ export interface BEEconJobResult {
   error: string;
 }
 
+//
+// Return a list of Job result
+export interface BEEconResults {
+  action: string;
+  value: BEEconJobResult[];
+}

@@ -87,6 +87,7 @@ Cette fonction permet de déterminer le résultat d'un **job** associé à des p
         return;
       }
 
+      const jobResults = results.value;
       //
       // Access on result 
       jobResults.forEach(result => {
@@ -107,6 +108,13 @@ Le résultat est une représentation en String d'un buffer de bytes qui suit le 
 
 
 ``` js
+//
+// Return a list of Job result
+export interface BEEconResults {
+  action: string;
+  value: BEEconJobResult[];
+}
+
 export interface BEEconJobResult {
   address: string;
   result: string;

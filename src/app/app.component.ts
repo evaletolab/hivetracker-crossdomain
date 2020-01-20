@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { BEEconDict } from './beecon-protocol';
@@ -32,7 +32,10 @@ export class AppComponent implements OnInit{
 
   results: BEEconJobResult[];
 
-  constructor(){
+  constructor(
+    private $ngZone: NgZone,
+    private $cdr: ChangeDetectorRef,
+  ){
     if(window['addresses'] && window['addresses'].lenght) {
       this.addresses = window['addresses'].map(a => {
         return {selected: true, value: a};
@@ -50,16 +53,21 @@ export class AppComponent implements OnInit{
       map(($event: any)  => {
         try{
           const data = JSON.parse($event.data);
-          console.log('---- CHILD callback',$event.origin);
-          console.log('---- CHILD callback',$event.data);
+          console.log('---- CHILD callback', $event.data);
           return data;
         } catch (e) {
           return {};
         }
       }),
-      filter(result => ( this.RECEIVE_MSG.indexOf(result.action) > -1 ))
+      filter(result => ( this.RECEIVE_MSG.indexOf(result.action) > -1 )),
+      map(result => result.value)
     ).subscribe( (jobResults: BEEconJobResult[]) => {
       this.results = jobResults;
+      console.log('---- CHILD callback', this.results);
+      // this.$ngZone.run(() => {
+      //   this.$cdr.markForCheck();
+      // });
+
     });
 
   }
