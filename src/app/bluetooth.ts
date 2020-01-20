@@ -4,7 +4,7 @@
 export interface BEEconCMD {
   cmd: string;
   text: string;
-  payload: boolean; // payload data ormat ex: 10-7-22 => [10,7,22]
+  payload: number[];
 }
 
 

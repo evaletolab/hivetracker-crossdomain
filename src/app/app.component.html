@@ -13,10 +13,10 @@
       <li *ngFor="let mac of addresses" [class.selected]="mac.selected" (click)="toggle(mac.value)">{{mac.value}}</li>
     </ul>
     <div class="">
-      <input [(ngModel)]="payload" type="text" [hidden]="!job.payload" class="payload">
+      <input [(ngModel)]="payload" type="text" [hidden]="!job.payload.length" class="payload">
     </div>
     
-    <button (click)="testJob()" [disabled]="job.payload&&!payload">{{job.text}}</button>
+    <button (click)="testJob()">{{job.text}}</button>
   </div>
 
   <!-- BLE INPUT ZONE -->

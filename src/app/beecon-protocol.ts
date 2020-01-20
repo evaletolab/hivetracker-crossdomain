@@ -1,90 +1,85 @@
 import { BEEconCMD } from './bluetooth';
 
-const defaultHandler = (rsp) => {
-  return "RAW:" + (rsp || []).join(':');
-};
-
-
 
 //
-// FIXME protocol service should be refactored
+// Initial protocol service 
 export class BEEconDict {
 
   static commands: BEEconCMD[] = [
     {
       cmd: "0x06",
       text: "Get epoch time",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x04",
       text: "Set epoch time",
-      payload: true
+      payload: [0]
     },
     {
       cmd: "0x07",
       text: "Set ID",
-      payload: true
+      payload: [0]
     },
     {
       cmd: "0x09",
       text: "Get ID",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x0a",
       text: "Set sensor threshold",
-      payload: true
+      payload: [0]
     },
     {
       cmd: "0x0b",
       text: "Get sensor threshold",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x0f",
       text: "Get last sensor measurement",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x12",
       text: "Get All data logs",
-      payload: true
+      payload: [0]
     },
     {
       cmd: "0x15",
       text: "Get num logs & max logs",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x18",
       text: "Get status",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x22",
       text: "Get battery percentage",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x23",
       text: "Set Beecon list",
-      payload: true
+      payload: [0]
     },
     {
       cmd: "0x25",
       text: "Get Beecon list",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x28",
       text: "Get num Beecon in list",
-      payload: false
+      payload: []
     },
     {
       cmd: "0x2c",
       text: "Set thresholds 2?",
-      payload: true
+      payload: [0]
     }
   ];
 

@@ -11,6 +11,7 @@ import { BEEconCMD, BEEconJobResult } from './bluetooth';
 })
 export class AppComponent implements OnInit{
   job: BEEconCMD;
+  payload:string;
 
   cmds = BEEconDict.commands.slice();
   title = 'hivertracker-cross-domain-tester';
@@ -76,10 +77,13 @@ export class AppComponent implements OnInit{
   // CROSS DOMAIN POST MESSAGE
   // https://developer.mozilla.org/fr/docs/Web/API/Window/postMessage
   sendMessage(message, job, addresses) {
+
+    // 
+    // Use payload value from user input
     const data = {
       action: message,
       addresses: (addresses),
-      run: job
+      run: (Object.assign({}, job, {payload: this.payload}) as BEEconCMD)
     };
     window.parent.postMessage(JSON.stringify(data), '*');
   }
