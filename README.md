@@ -94,7 +94,7 @@ Cette fonction permet a l'application hivetracker.io de capturer le résultat d'
 
       //
       // voerify the context
-      if (result.action === 'hivetracker:receive') {
+      if (result.action !== 'hivetracker:receive') {
         return;
       }
 
