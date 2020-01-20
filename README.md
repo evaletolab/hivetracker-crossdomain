@@ -67,6 +67,8 @@ export interface BEEconCMD {
 }
 ``` 
 
+* [bluetooth.ts](src/app/bluetooth.ts) 
+* [beecon-protocol.ts](src/app/beecon-protocol.ts)
 
 ### 2. Communication de Ionic à Hivetracker.io
 Cette fonction permet de déterminer le résultat d'un **job** associé à des périphériques BluetoothLE.
@@ -111,6 +113,9 @@ export interface BEEconJobResult {
   error: string;
 }
 ``` 
+
+* [bluetooth.ts](src/app/bluetooth.ts) 
+* [beecon-protocol.ts](src/app/beecon-protocol.ts)
 
 
 ### 3. Mode DEBUG
