@@ -22,8 +22,12 @@
   <!-- BLE INPUT ZONE -->
   <div class="block">
     <h3>Receive Content</h3>
-    <pre>
-      {{receive | json }}
+    <ul>
+      <li *ngFor="let result of results">
+        {{result.address}} value({{result.value}}), error({{result.error}})
+      </li>
+    </ul>
+    <pre>      
     </pre>
   </div>
 

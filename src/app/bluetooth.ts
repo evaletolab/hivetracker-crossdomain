@@ -20,7 +20,7 @@ export interface BEEconJob {
 // Return Job result
 export interface BEEconJobResult {
   address: string;
-  result: any;
-  error: any;
+  value: string;
+  error: string;
 }
 

@@ -10,12 +10,6 @@ const defaultHandler = (rsp) => {
 // FIXME protocol service should be refactored
 export class BEEconDict {
 
-  static services = {
-    NUS_SERVICE_UUID: "00000001-4245-5354-2d48-49564554524b",
-    NUS_TX_CHARACTERISTIC_UUID: "00000002-4245-5354-2d48-49564554524b",
-    NUS_RX_CHARACTERISTIC_UUID: "00000003-4245-5354-2d48-49564554524b"
-  };
-
   static commands: BEEconCMD[] = [
     {
       cmd: "0x06",
@@ -94,31 +88,6 @@ export class BEEconDict {
     }
   ];
 
-
-  static response = {
-    2: {
-      handler: rsp => {
-        return "Wrong parameters";
-      }
-    },
-    8: {
-      handler: rsp => {
-        return (
-          "Beecon ID: " + rsp[3] + rsp[4] + rsp[5] + rsp[6] + rsp[7] + rsp[8]
-        );
-      }
-    },
-    33: {
-      handler: rsp => {
-        return "Battery percentage" + rsp[3] + "%";
-      }
-    }
-  };
-
-  static crc(buffer) {
-
-  }
-
   //
   // SPECs on PDF Document
   // Apparatus-APP air Protocol 1.0 (rev4)
@@ -163,15 +132,12 @@ export class BEEconDict {
   // --> temp(Max[2],Min[2])
   // 0x09 => 2:8:6:1:0:0:0:0:65:76
   static decodeBuffer(bytes) {
-    let raw = "";
+    let raw = '';
     for (let i = 0; i < bytes.byteLength; i++) {
       raw += bytes[i].toString();
-      raw += ":";
+      raw += ':';
     }
 
-    console.log('--DEBUG RAW:', raw);
-    const result = raw.split(":");
-    const rspHandler = this.response[Number(result[1])] ? (this.response[Number(result[1])].handler) : (defaultHandler);
-    return rspHandler(result);
+    return raw;
   }
 }

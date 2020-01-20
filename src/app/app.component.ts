@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { BEEconDict } from './beecon-protocol';
-import { BEEconCMD } from './bluetooth';
+import { BEEconCMD, BEEconJobResult } from './bluetooth';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   job: BEEconCMD;
-  payload: string;
 
   cmds = BEEconDict.commands.slice();
-  title = 'hivertracker-iframe-com';
+  title = 'hivertracker-cross-domain-tester';
   addresses = [
     {selected: true, value: '1'},
     {selected: true, value: '2'},
@@ -24,11 +23,13 @@ export class AppComponent {
     {selected: true, value: '00:00:00:00:03:35'}
   ];
 
+  //
+  // Authorized messages
   RECEIVE_MSG = [
     'hivetracker:receive',
-  ]
+  ];
 
-  receive;
+  results: BEEconJobResult[];
 
   constructor(){
     if(window['addresses'] && window['addresses'].lenght) {
@@ -37,8 +38,34 @@ export class AppComponent {
       });
     }
     this.job = BEEconDict.commands[0];
+    this.results = [];
+  }
+  //
+  // ANGULAR API
+  ngOnInit() {
+    //
+    // HiveTracker CROSS-DOMAIN COMMUNICATION
+    fromEvent(window, 'message').pipe(
+      map(($event: any)  => {
+        try{
+          const data = JSON.parse($event.data);
+          console.log('---- CHILD callback',$event.origin);
+          console.log('---- CHILD callback',$event.data);
+          return data;
+        } catch (e) {
+          return {};
+        }
+      }),
+      filter(result => ( this.RECEIVE_MSG.indexOf(result.action) > -1 ))
+    ).subscribe( (jobResults: BEEconJobResult[]) => {
+      this.results = jobResults;
+    });
+
   }
 
+
+  //
+  // PUBLIC API
   toggle(address) {
     const add = this.addresses.find( add => add.value === address );
     add.selected = ! add.selected;
@@ -62,49 +89,4 @@ export class AppComponent {
     this.sendMessage('hivetracker:job', this.job, addresses);
   }
 
-  testSend() {
-
-  }
-
-  ngOnInit() {
-    if ( !window.addEventListener ) {
-      alert('ERROR: CROSS DOMAIN COMMUNICATION LIMITATION (event)');
-      return;
-    }
-
-    if ( !window.parent ) {
-      alert('ERROR: CROSS DOMAIN COMMUNICATION LIMITATION (parent)');
-      return;
-    }
-
-
-
-    //
-    // CROSS-DOMAIN COMMUNICATION
-    // DATA FORMAT { msg : MESSAGE_NAME, data: CONTENT}
-    fromEvent(window, 'message').pipe(
-      filter(($event: any) => (typeof $event.data === 'string' && $event.data[0] === '{' )),
-      map(($event: any)  => {
-        try{
-          const data = JSON.parse($event.data);
-          console.log('---- CHILD callback',$event.origin);
-          console.log('---- CHILD callback',$event.data);
-          if ( this.RECEIVE_MSG.indexOf(data.action) === -1 ) {
-            return;
-          }
-
-          //
-          // ASK CLOSE 
-          // this.sendMessage('hivertracker:close');
-          return data;
-        } catch (e) {
-          console.log('ERROR postMessage', $event);
-          return {};
-        }
-      })
-    ).subscribe( message => {
-      this.receive = message;
-    });
-
-  }
 }
