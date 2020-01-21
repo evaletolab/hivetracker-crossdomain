@@ -19,9 +19,13 @@ export class AppComponent implements OnInit{
     {selected: true, value: '1'},
     {selected: true, value: '2'},
     {selected: true, value: '3'},
+    {selected: true, value: '01:00:00:00:04:F1'},
+    {selected: true, value: '01:00:00:00:04:F2'},
     {selected: true, value: '01:00:00:00:00:41'},
-    {selected: true, value: '00:00:00:00:03:38'},
-    {selected: true, value: '00:00:00:00:03:35'}
+    {selected: true, value: '01:00:00:00:00:42'},
+    {selected: true, value: '00:00:00:00:03:35'},
+    {selected: true, value: '00:00:00:00:03:36'},
+    {selected: true, value: '00:00:00:00:03:38'}
   ];
 
   //
