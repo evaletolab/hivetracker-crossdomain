@@ -3,11 +3,11 @@
 
 
 # app.hivertracker.io cross domain communication
-L’objectif est de réaliser une solution logicielle qui permet d’utiliser les fonctionnalités business de app.hivetracker.io et le bluetooth (Ionic) dans le même context applicatif ou au moins dans le même OS avec deux applications distinctes. 
+L’objectif est de réaliser une solution logicielle qui permet d’utiliser les fonctionnalités business de [app.hivetracker.io](app.hivetracker.io) et le bluetooth (Ionic) dans le même context applicatif. 
 
 ## CROSS-DOMAIN Communication
 Pour permettre une communication CROSS-DOMAIN en toute sécurité il faut suivre quelques règles. Normalement, les scripts de différentes pages sont autorisés à accéder les uns aux autres si et seulement si les pages depuis lesquelles ils sont exécutés ont des URL de même origine, c'est-à-dire avec le même protocole (généralement http ou https), le même numéro de port (80 étant le port par défaut pour  http), et le même nom d'hôte (à condition que document.domain soit initialisé à la même valeur par les deux pages).
- La nature de l'application Web hivetracker.io et son fonctionnement avec PHP ne permet pas de garantir la même origine, ainsi il n’est pas possible de faire une passerelle "naïve" entre le Web et Ionic.
+ La nature de l'application Web [app.hivetracker.io](app.hivetracker.io) et son fonctionnement avec PHP ne permet pas de garantir la même origine, ainsi il n’est pas possible de faire une passerelle "naïve" entre le Web et Ionic.
 
 
 * https://developer.mozilla.org/fr/docs/Web/Security/Same_origin_policy_for_JavaScript
@@ -82,7 +82,7 @@ export interface BEEconCMD {
 * [beecon-protocol.ts](src/app/beecon-protocol.ts)
 
 ### 2. Communication de Ionic à Hivetracker.io
-Cette fonction permet de déterminer le résultat d'un **job** associé à des périphériques BluetoothLE.
+Cette fonction permet a l'application hivetracker.io de capturer le résultat d'un **job** .
 
 
 ``` js
@@ -94,7 +94,7 @@ Cette fonction permet de déterminer le résultat d'un **job** associé à des p
 
       //
       // voerify the context
-      if (result.action === 'hivetracker:receive') {
+      if (result.action !== 'hivetracker:receive') {
         return;
       }
 
