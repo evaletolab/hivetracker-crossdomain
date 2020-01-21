@@ -3,7 +3,7 @@
 
 
 # app.hivertracker.io cross domain communication
-L’objectif est de réaliser une solution logicielle qui permet d’utiliser les fonctionnalités business de app.hivetracker.io et le bluetooth (Ionic) dans le même context applicatif ou au moins dans le même OS avec deux applications distinctes. 
+L’objectif est de réaliser une solution logicielle qui permet d’utiliser les fonctionnalités business de app.hivetracker.io et le bluetooth (Ionic) dans le même context applicatif. 
 
 ## CROSS-DOMAIN Communication
 Pour permettre une communication CROSS-DOMAIN en toute sécurité il faut suivre quelques règles. Normalement, les scripts de différentes pages sont autorisés à accéder les uns aux autres si et seulement si les pages depuis lesquelles ils sont exécutés ont des URL de même origine, c'est-à-dire avec le même protocole (généralement http ou https), le même numéro de port (80 étant le port par défaut pour  http), et le même nom d'hôte (à condition que document.domain soit initialisé à la même valeur par les deux pages).
