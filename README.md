@@ -18,6 +18,7 @@ Nous avons créé une API (javascript) qui respecte la norme de sécurité (CROS
 
 1. Communication depuis hivetracker.io à Ionic (BLE)
 2. Communication depuis Ionic (BLE) à Hivetracker.io 
+3. Un exemple complet
 
 ### 1. Communication de Hivetracker.io à Ionic
 ``` js
@@ -137,7 +138,35 @@ export interface BEEconJobResult {
 * [beecon-protocol.ts](src/app/beecon-protocol.ts)
 
 
-### 3. Mode DEBUG
+### 3. Un exemple complet
+Dans cet exemple nous allons modifier le référentiel de temps (Set Epoch Time). Toutes les références au protocol sont décrite dans le document `Protocol APP-apparatus - rev4`.
+
+#### Sender (A)
+``` js
+  const addresses = [
+    '00:00:00:00:03:35',
+    '00:00:00:00:03:36',
+  ];
+
+  //
+  // get Epoch time in HEX 
+  //  const hexStr = (Date.now()/1000|0).toString(16);
+  // get array of Numbers 
+  //  hexStr.match(/.{1,2}/g).map(hex=>parseInt(hex,16))
+  const run = {
+    cmd: "0x04",
+    text: "Set epoch time",
+    payload:[ 94,38,214,190]
+  };
+  
+  const job = {
+    action: 'hivertracker:job',
+    addresses: (addresses),
+    run: (run)
+  };
+  window.parent.postMessage(JSON.stringify(job), '*');
+```
+#### Callback (B)
 
 
 
